@@ -268,10 +268,11 @@ function animate(time) {
   // here, toss.isTossed is checking if "animation" is still ongoing
   if (toss.isTossed) {
     const normX = (coin.rotation.x / toss.coinRotationX) * 2 - 1; // normalized then to -1 -> 1
-    // const speed = 0.2 * Math.pow(normX, 2); // parabola
-    const speed = Math.pow(Math.abs(normX), 1.5);
+    const speed = 0.2 * Math.pow(normX, 2); // parabola
+    // const speed = Math.pow(Math.abs(normX), 1.5);
 
-    coin.rotation.x += Math.PI / 60;
+    // 60 frames
+    coin.rotation.x += Math.PI / (60 / 2);
 
     // if( toss.randTurn == (coin.rotation.x / (2*Math.PI)).toFixed() ){
     if (coin.rotation.x.toFixed(toFix) === toss.coinRotationX.toFixed(toFix)) {
