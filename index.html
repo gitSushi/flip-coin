@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#b87333">
+  <link rel="stylesheet" href="src/style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="images/gitsushi192.png">
+  <title>lossushi - toss coin</title>
+</head>
+
+<body>
+  <div class="scene"></div>
+  <p id="toss-result"></p>
+
+  <!-- 
+      void main() {
+        gl_Position = vec4(position, 1.0);
+      }
+     -->
+
+  <script id="vertexShader" type="x-shader/x-vertex">
+      varying vec2 vUv;
+
+			void main()
+			{
+				vUv = uv;
+				vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+				gl_Position = projectionMatrix * mvPosition;
+      }
+    </script>
+  <script id="fragmentShader" type="x-shader/x-fragment">
+      #ifdef GL_ES
+      precision mediump float;
+      #endif
+      
+      #define PI 3.14159265359
+      #define TWO_PI 6.28318530718
+      
+      uniform vec2 u_resolution;
+      uniform float u_time;
+      
+      void main(){
+          vec2 st = gl_FragCoord.xy/u_resolution.xy;
+
+          vec3 color = vec3(0.721,0.451,0.2);
+      
+          gl_FragColor = vec4(color,1.0);
+      }
+    </script>
+
+  <script src="three.min.js"></script>
+  <script src="GLTFLoader.js"></script>
+  <script src="OrbitControls.js"></script>
+
+  <script src="app.js"></script>
+
+  <!-- <script src="src/index.js"></script> -->
+</body>
+
+</html>
